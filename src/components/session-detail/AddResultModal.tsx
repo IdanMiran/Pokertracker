@@ -47,7 +47,7 @@ export function AddResultModal({ visible, onClose, sessionId, players, buyins, r
     <Modal visible={visible} onClose={onClose} title="Enter Result">
       <div className="flex flex-col gap-4">
         <div>
-          <p className="text-sm font-medium mb-2" style={{ color: '#888' }}>Select Player</p>
+          <p className="text-sm font-medium mb-2" style={{ color: '#64748b' }}>Select Player</p>
           <div className="flex flex-wrap gap-2">
             {playersWithBuyins.map(p => {
               const hasResult = results.some(r => r.playerId === p.id);
@@ -55,9 +55,9 @@ export function AddResultModal({ visible, onClose, sessionId, players, buyins, r
                 <button key={p.id} onClick={() => setPlayerId(p.id)}
                   className="px-4 py-2 rounded-full text-sm font-semibold border transition-colors"
                   style={{
-                    backgroundColor: playerId === p.id ? '#dc2626' : '#1a1a1a',
-                    color: playerId === p.id ? '#ffffff' : '#f5f5f5',
-                    borderColor: playerId === p.id ? '#dc2626' : hasResult ? '#4caf82' : '#333',
+                    backgroundColor: playerId === p.id ? '#dc2626' : '#1b1e30',
+                    color: playerId === p.id ? '#ffffff' : '#e2e8f0',
+                    borderColor: playerId === p.id ? '#dc2626' : hasResult ? '#10b981' : '#232640',
                   }}>
                   {p.name}{hasResult ? ' ✓' : ''}
                 </button>
@@ -67,7 +67,7 @@ export function AddResultModal({ visible, onClose, sessionId, players, buyins, r
         </div>
 
         {existing && (
-          <p className="text-sm px-3 py-2 rounded-lg" style={{ backgroundColor: '#2a1515', color: '#4caf82' }}>
+          <p className="text-sm px-3 py-2 rounded-lg" style={{ backgroundColor: '#2a1515', color: '#10b981' }}>
             Current result: {formatILS(existing.finalCash)} — will be overwritten.
           </p>
         )}
@@ -78,9 +78,9 @@ export function AddResultModal({ visible, onClose, sessionId, players, buyins, r
               <button key={mode} onClick={() => setUseChips(mode === 'chips')}
                 className="flex-1 py-2 rounded-xl text-sm font-semibold border transition-colors"
                 style={{
-                  backgroundColor: (mode === 'chips') === useChips ? '#dc2626' : '#1a1a1a',
-                  color: (mode === 'chips') === useChips ? '#ffffff' : '#f5f5f5',
-                  borderColor: (mode === 'chips') === useChips ? '#dc2626' : '#333',
+                  backgroundColor: (mode === 'chips') === useChips ? '#dc2626' : '#1b1e30',
+                  color: (mode === 'chips') === useChips ? '#ffffff' : '#e2e8f0',
+                  borderColor: (mode === 'chips') === useChips ? '#dc2626' : '#232640',
                 }}>
                 {mode === 'chips' ? 'Enter Chips' : 'Enter Cash'}
               </button>
@@ -91,14 +91,14 @@ export function AddResultModal({ visible, onClose, sessionId, players, buyins, r
         {useChips && chipToCashRatio ? (
           <div>
             <Input label="Final chip count" placeholder="e.g. 5000" value={chips} type="number" onChange={e => setChips(e.target.value)} />
-            {computedCash && <p className="text-sm mt-1.5" style={{ color: '#888' }}>= ₪{computedCash} (₪{chipToCashRatio}/chip)</p>}
+            {computedCash && <p className="text-sm mt-1.5" style={{ color: '#64748b' }}>= ₪{computedCash} (₪{chipToCashRatio}/chip)</p>}
           </div>
         ) : (
           <Input label="Final cash (₪)" placeholder="e.g. 450" value={cash} type="number"
             onChange={e => setCash(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSave()} />
         )}
 
-        {error && <p className="text-sm text-[#e05252]">{error}</p>}
+        {error && <p className="text-sm text-[#f87171]">{error}</p>}
         <Button onClick={handleSave} loading={loading} fullWidth>Save Result</Button>
       </div>
     </Modal>

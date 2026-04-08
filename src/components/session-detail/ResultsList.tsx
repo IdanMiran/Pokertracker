@@ -22,22 +22,22 @@ export function ResultsList({ sessionId, players, buyins, results, isActive }: P
         return (
           <div key={player.id}
             className="flex items-center justify-between p-4 rounded-xl border"
-            style={{ backgroundColor: '#1a1a1a', borderColor: result ? '#4caf82' : '#333' }}>
+            style={{ backgroundColor: '#1b1e30', borderColor: result ? '#10b981' : '#232640' }}>
             <div>
-              <p className="font-semibold" style={{ color: '#f5f5f5' }}>{player.name}</p>
-              <p className="text-sm" style={{ color: '#888' }}>Bought in: {formatILS(totalBuyIn)}</p>
+              <p className="font-semibold" style={{ color: '#e2e8f0' }}>{player.name}</p>
+              <p className="text-sm" style={{ color: '#64748b' }}>Bought in: {formatILS(totalBuyIn)}</p>
             </div>
             <div className="flex items-center gap-3">
               {result ? (
                 <div className="text-right">
-                  <p className="font-bold" style={{ color: '#4caf82' }}>{formatILS(result.finalCash)}</p>
-                  <p className="text-xs" style={{ color: '#888' }}>cash out</p>
+                  <p className="font-bold" style={{ color: '#10b981' }}>{formatILS(result.finalCash)}</p>
+                  <p className="text-xs" style={{ color: '#64748b' }}>cash out</p>
                 </div>
               ) : (
-                <span className="text-sm px-3 py-1 rounded-lg border border-[#333]" style={{ color: '#888' }}>Pending</span>
+                <span className="text-sm px-3 py-1 rounded-lg border border-[#232640]" style={{ color: '#64748b' }}>Pending</span>
               )}
               {isActive && result && (
-                <button onClick={() => handleDelete(player.id)} className="text-xs px-2 py-0.5 rounded" style={{ color: '#e05252', backgroundColor: '#2a1515' }}>✕</button>
+                <button onClick={() => handleDelete(player.id)} className="text-xs px-2 py-0.5 rounded" style={{ color: '#f87171', backgroundColor: '#2a1515' }}>✕</button>
               )}
             </div>
           </div>

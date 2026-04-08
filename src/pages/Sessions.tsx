@@ -28,14 +28,14 @@ export function Sessions() {
   return (
     <div className="pb-24">
       {/* Tab switcher */}
-      <div className="flex gap-2 p-4 sticky top-0 z-10" style={{ backgroundColor: '#0a0a0a' }}>
+      <div className="flex gap-2 p-4 sticky top-0 z-10" style={{ backgroundColor: '#0d0f1a' }}>
         {(['active', 'completed'] as Tab[]).map(t => (
           <button key={t} onClick={() => setTab(t)}
             className="flex-1 py-2.5 rounded-xl text-sm font-semibold border transition-colors"
             style={{
-              backgroundColor: tab === t ? '#dc2626' : '#1a1a1a',
-              color: tab === t ? '#0a0a0a' : '#888',
-              borderColor: tab === t ? '#dc2626' : '#333',
+              backgroundColor: tab === t ? '#dc2626' : '#151829',
+              color: tab === t ? '#0d0f1a' : '#64748b',
+              borderColor: tab === t ? '#dc2626' : '#232640',
             }}>
             {t === 'active' ? 'Active' : 'Completed'} ({sessions.filter(s => s.status === t).length})
           </button>

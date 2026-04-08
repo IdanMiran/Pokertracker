@@ -29,15 +29,15 @@ export function AddBuyInModal({ visible, onClose, sessionId, players }: Props) {
     <Modal visible={visible} onClose={onClose} title="Add Buy-In">
       <div className="flex flex-col gap-4">
         <div>
-          <p className="text-sm font-medium mb-2" style={{ color: '#888' }}>Select Player</p>
+          <p className="text-sm font-medium mb-2" style={{ color: '#64748b' }}>Select Player</p>
           <div className="flex flex-wrap gap-2">
             {players.map(p => (
               <button key={p.id} onClick={() => setPlayerId(p.id)}
                 className="px-4 py-2 rounded-full text-sm font-semibold border transition-colors"
                 style={{
-                  backgroundColor: playerId === p.id ? '#dc2626' : '#1a1a1a',
-                  color: playerId === p.id ? '#ffffff' : '#f5f5f5',
-                  borderColor: playerId === p.id ? '#dc2626' : '#333',
+                  backgroundColor: playerId === p.id ? '#dc2626' : '#1b1e30',
+                  color: playerId === p.id ? '#ffffff' : '#e2e8f0',
+                  borderColor: playerId === p.id ? '#dc2626' : '#232640',
                 }}>
                 {p.name}
               </button>
@@ -46,7 +46,7 @@ export function AddBuyInModal({ visible, onClose, sessionId, players }: Props) {
         </div>
         <Input label="Amount (₪)" placeholder="e.g. 100" value={amount} type="number"
           onChange={e => setAmount(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleAdd()} />
-        {error && <p className="text-sm text-[#e05252]">{error}</p>}
+        {error && <p className="text-sm text-[#f87171]">{error}</p>}
         <Button onClick={handleAdd} loading={loading} fullWidth>Add Buy-In</Button>
       </div>
     </Modal>

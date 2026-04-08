@@ -44,7 +44,7 @@ export function SessionDetail() {
   }
 
   if (loading) return <div className="flex items-center justify-center h-64"><div className="text-[#dc2626] text-2xl">♠️</div></div>;
-  if (!session) return <div className="p-4 text-center" style={{ color: '#888' }}>Session not found.</div>;
+  if (!session) return <div className="p-4 text-center" style={{ color: '#64748b' }}>Session not found.</div>;
 
   const totalPot = buyins.reduce((s, b) => s + b.amount, 0);
   const uniquePlayers = new Set(buyins.map(b => b.playerId)).size;
@@ -52,20 +52,20 @@ export function SessionDetail() {
   return (
     <div className="flex flex-col" style={{ minHeight: 'calc(100dvh - 56px)' }}>
       {/* Header */}
-      <div className="p-4 border-b border-[#333]" style={{ backgroundColor: '#1a1a1a' }}>
+      <div className="p-4 border-b border-[#232640]" style={{ backgroundColor: '#151829' }}>
         <div className="flex items-center justify-between mb-2">
-          <p className="text-sm" style={{ color: '#888' }}>{format(session.date, 'EEEE, dd MMM yyyy')}</p>
+          <p className="text-sm" style={{ color: '#64748b' }}>{format(session.date, 'EEEE, dd MMM yyyy')}</p>
           <Badge label={isActive ? 'Active' : 'Completed'} type={session.status} />
         </div>
         <div className="flex gap-6">
-          <div><p className="text-xs" style={{ color: '#888' }}>Players</p><p className="font-bold" style={{ color: '#f5f5f5' }}>{uniquePlayers}</p></div>
-          <div><p className="text-xs" style={{ color: '#888' }}>Total pot</p><p className="font-bold" style={{ color: '#dc2626' }}>₪{totalPot}</p></div>
-          <div><p className="text-xs" style={{ color: '#888' }}>Results</p><p className="font-bold" style={{ color: '#f5f5f5' }}>{results.length}/{uniquePlayers}</p></div>
+          <div><p className="text-xs" style={{ color: '#64748b' }}>Players</p><p className="font-bold" style={{ color: '#e2e8f0' }}>{uniquePlayers}</p></div>
+          <div><p className="text-xs" style={{ color: '#64748b' }}>Total pot</p><p className="font-bold" style={{ color: '#dc2626' }}>₪{totalPot}</p></div>
+          <div><p className="text-xs" style={{ color: '#64748b' }}>Results</p><p className="font-bold" style={{ color: '#e2e8f0' }}>{results.length}/{uniquePlayers}</p></div>
         </div>
       </div>
 
       {/* Section tabs */}
-      <div className="flex border-b border-[#333]" style={{ backgroundColor: '#1a1a1a' }}>
+      <div className="flex border-b border-[#232640]" style={{ backgroundColor: '#151829' }}>
         {(['buyins', 'results', 'settlement'] as Section[]).map(s => (
           <button key={s} onClick={() => setSection(s)}
             className="flex-1 py-3 text-sm font-semibold border-b-2 transition-colors"

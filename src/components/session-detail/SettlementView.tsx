@@ -31,16 +31,16 @@ export function SettlementView({ players, buyins, results, sessionName }: Props)
   return (
     <div className="flex flex-col gap-4">
       {/* Net results */}
-      <div className="rounded-xl p-4 border border-[#333]" style={{ backgroundColor: '#1a1a1a' }}>
-        <p className="text-xs font-semibold mb-3" style={{ color: '#888' }}>NET RESULTS</p>
+      <div className="rounded-xl p-4 border border-[#232640]" style={{ backgroundColor: '#1b1e30' }}>
+        <p className="text-xs font-semibold mb-3" style={{ color: '#64748b' }}>NET RESULTS</p>
         {nets.map(n => {
-          const color = n.net > 0 ? '#4caf82' : n.net < 0 ? '#e05252' : '#888';
+          const color = n.net > 0 ? '#10b981' : n.net < 0 ? '#f87171' : '#64748b';
           const sign = n.net > 0 ? '+' : '';
           return (
-            <div key={n.playerId} className="flex justify-between items-center py-3 border-b border-[#333] last:border-0">
+            <div key={n.playerId} className="flex justify-between items-center py-3 border-b border-[#232640] last:border-0">
               <div>
-                <p className="font-semibold" style={{ color: '#f5f5f5' }}>{n.playerName}</p>
-                <p className="text-xs" style={{ color: '#888' }}>In: {formatILS(n.totalBuyIn)} · Out: {formatILS(n.finalCash)}</p>
+                <p className="font-semibold" style={{ color: '#e2e8f0' }}>{n.playerName}</p>
+                <p className="text-xs" style={{ color: '#64748b' }}>In: {formatILS(n.totalBuyIn)} · Out: {formatILS(n.finalCash)}</p>
               </div>
               <span className="text-lg font-bold" style={{ color }}>{sign}{formatILS(Math.abs(n.net))}</span>
             </div>
@@ -50,13 +50,13 @@ export function SettlementView({ players, buyins, results, sessionName }: Props)
 
       {/* Transfers */}
       {transfers.length > 0 ? (
-        <div className="rounded-xl p-4 border border-[#333]" style={{ backgroundColor: '#2a1515' }}>
-          <p className="text-xs font-semibold mb-3" style={{ color: '#888' }}>TRANSFERS</p>
+        <div className="rounded-xl p-4 border border-[#dc2626]" style={{ backgroundColor: '#1a0a0a' }}>
+          <p className="text-xs font-semibold mb-3" style={{ color: '#64748b' }}>TRANSFERS</p>
           {transfers.map((t, i) => (
-            <div key={i} className="flex justify-between items-center py-3 border-b border-[#333] last:border-0">
-              <p style={{ color: '#f5f5f5' }}>
+            <div key={i} className="flex justify-between items-center py-3 border-b border-[#232640] last:border-0">
+              <p style={{ color: '#e2e8f0' }}>
                 <span className="font-bold">{t.from}</span>
-                <span style={{ color: '#888' }}> pays </span>
+                <span style={{ color: '#64748b' }}> pays </span>
                 <span className="font-bold">{t.to}</span>
               </p>
               <span className="text-lg font-bold" style={{ color: '#dc2626' }}>{formatILS(t.amount)}</span>
@@ -64,15 +64,15 @@ export function SettlementView({ players, buyins, results, sessionName }: Props)
           ))}
         </div>
       ) : (
-        <div className="rounded-xl p-4 border border-[#4caf82] text-center" style={{ backgroundColor: '#2a1515' }}>
-          <p className="font-semibold" style={{ color: '#4caf82' }}>All square — no transfers needed!</p>
+        <div className="rounded-xl p-4 border border-[#10b981] text-center" style={{ backgroundColor: '#0d1e15' }}>
+          <p className="font-semibold" style={{ color: '#10b981' }}>All square — no transfers needed!</p>
         </div>
       )}
 
       {/* Share */}
       <button onClick={handleShare}
-        className="w-full py-3 rounded-xl border border-[#333] font-semibold transition-opacity active:opacity-75"
-        style={{ backgroundColor: '#1a1a1a', color: '#dc2626' }}>
+        className="w-full py-3 rounded-xl border border-[#232640] font-semibold transition-opacity active:opacity-75"
+        style={{ backgroundColor: '#1b1e30', color: '#dc2626' }}>
         Share Summary 📤
       </button>
     </div>

@@ -14,8 +14,8 @@ interface ButtonProps {
 
 const styles: Record<Variant, string> = {
   primary: 'bg-[#dc2626] text-white font-semibold',
-  secondary: 'bg-[#1a1a1a] text-[#f5f5f5] border border-[#333]',
-  danger: 'bg-[#e05252] text-white font-semibold',
+  secondary: 'bg-[#1b1e30] text-[#e2e8f0] border border-[#232640]',
+  danger: 'bg-[#dc2626] text-white font-semibold',
   ghost: 'bg-transparent text-[#dc2626] font-semibold',
 };
 

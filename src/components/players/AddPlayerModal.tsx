@@ -26,7 +26,7 @@ export function AddPlayerModal({ visible, onClose }: Props) {
       <div className="flex flex-col gap-4">
         <Input label="Player name" placeholder="e.g. Idan" value={name} onChange={e => setName(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && handleAdd()} autoFocus />
-        {error && <p className="text-sm text-[#e05252]">{error}</p>}
+        {error && <p className="text-sm text-[#f87171]">{error}</p>}
         <Button onClick={handleAdd} loading={loading} fullWidth>Add Player</Button>
       </div>
     </Modal>

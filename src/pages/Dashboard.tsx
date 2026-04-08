@@ -33,11 +33,11 @@ export function Dashboard() {
     <div className="pb-24">
       {/* Hero header */}
       <div className="px-4 pt-5 pb-6" style={{
-        background: 'linear-gradient(160deg, #1a0a0a 0%, #0a0a0a 60%)',
-        borderBottom: '1px solid #1f1f1f',
+        background: 'linear-gradient(160deg, #1a0a12 0%, #0d0f1a 60%)',
+        borderBottom: '1px solid #232640',
       }}>
         <p className="text-xs font-semibold tracking-widest mb-1" style={{ color: '#dc2626' }}>POKER TRACKER</p>
-        <p className="text-2xl font-bold mb-4" style={{ color: '#f5f5f5' }}>
+        <p className="text-2xl font-bold mb-4" style={{ color: '#e2e8f0' }}>
           {activeSessions.length > 0 ? 'Game in progress 🃏' : 'Ready to play?'}
         </p>
 
@@ -52,7 +52,7 @@ export function Dashboard() {
             }}>
             <div>
               <p className="text-xs font-bold tracking-widest mb-0.5" style={{ color: '#dc2626' }}>● LIVE</p>
-              <p className="text-base font-bold" style={{ color: '#f5f5f5' }}>{activeSessions[0].name}</p>
+              <p className="text-base font-bold" style={{ color: '#e2e8f0' }}>{activeSessions[0].name}</p>
             </div>
             <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#dc2626' }}>
               <span className="text-white text-sm font-bold">→</span>
@@ -68,12 +68,12 @@ export function Dashboard() {
             { label: 'Active', value: activeSessions.length, icon: '🔴' },
           ].map(({ label, value, icon }) => (
             <div key={label} className="rounded-xl p-3 text-center" style={{
-              backgroundColor: '#161616',
-              border: '1px solid #222',
+              backgroundColor: '#151829',
+              border: '1px solid #232640',
             }}>
               <p className="text-lg mb-0.5">{icon}</p>
-              <p className="text-xl font-bold" style={{ color: '#f5f5f5' }}>{value}</p>
-              <p className="text-xs" style={{ color: '#666' }}>{label}</p>
+              <p className="text-xl font-bold" style={{ color: '#e2e8f0' }}>{value}</p>
+              <p className="text-xs" style={{ color: '#64748b' }}>{label}</p>
             </div>
           ))}
         </div>
@@ -92,7 +92,7 @@ export function Dashboard() {
         </button>
 
         {/* Recent sessions */}
-        <p className="text-xs font-semibold tracking-widest mb-3" style={{ color: '#666' }}>RECENT SESSIONS</p>
+        <p className="text-xs font-semibold tracking-widest mb-3" style={{ color: '#64748b' }}>RECENT SESSIONS</p>
         {recentSessions.length === 0
           ? <EmptyState icon="🃏" title="No sessions yet" subtitle="Start your first poker night!" />
           : recentSessions.map(s => <SessionCard key={s.id} session={s} buyins={buyinsBySession[s.id] ?? []} />)

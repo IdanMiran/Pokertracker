@@ -45,7 +45,7 @@ export function Players() {
       {players.length === 0
         ? <EmptyState icon="👥" title="No players yet" subtitle="Add your group members to start tracking" />
         : stats.map((s, i) => {
-            const netColor = s.totalNet > 0 ? '#4caf82' : s.totalNet < 0 ? '#e05252' : '#666';
+            const netColor = s.totalNet > 0 ? '#10b981' : s.totalNet < 0 ? '#f87171' : '#64748b';
             const sign = s.totalNet > 0 ? '+' : '';
             const rank = i + 1;
             const rankColor = rank === 1 ? '#f59e0b' : rank === 2 ? '#94a3b8' : rank === 3 ? '#b45309' : '#444';
@@ -54,9 +54,9 @@ export function Players() {
               <div key={s.playerId}
                 className="card-hover flex items-center justify-between p-4 rounded-2xl mb-3 cursor-pointer"
                 style={{
-                  backgroundColor: '#141414',
-                  border: '1px solid #222',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                  backgroundColor: '#151829',
+                  border: '1px solid #232640',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
                   borderLeft: `3px solid ${netColor}`,
                 }}
                 onClick={() => navigate(`/player/${s.playerId}`)}>
@@ -69,22 +69,22 @@ export function Players() {
                   </div>
                   {/* Avatar */}
                   <div className="w-10 h-10 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0"
-                    style={{ backgroundColor: '#1f1010', color: '#dc2626', border: '1px solid #2a1515' }}>
+                    style={{ backgroundColor: '#1e1020', color: '#dc2626', border: '1px solid #2a1520' }}>
                     {s.playerName.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <p className="font-semibold text-[15px]" style={{ color: '#f5f5f5' }}>{s.playerName}</p>
-                    <p className="text-xs" style={{ color: '#555' }}>{s.totalSessions} sessions</p>
+                    <p className="font-semibold text-[15px]" style={{ color: '#e2e8f0' }}>{s.playerName}</p>
+                    <p className="text-xs" style={{ color: '#64748b' }}>{s.totalSessions} sessions</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="text-right">
                     <p className="font-bold text-base" style={{ color: netColor }}>{sign}{formatILS(Math.abs(s.totalNet))}</p>
-                    <p className="text-xs" style={{ color: '#555' }}>net</p>
+                    <p className="text-xs" style={{ color: '#64748b' }}>net</p>
                   </div>
                   <button onClick={e => { e.stopPropagation(); handleDelete(s.playerId, s.playerName); }}
                     className="w-7 h-7 rounded-lg flex items-center justify-center text-xs transition-opacity hover:opacity-100 opacity-40"
-                    style={{ color: '#e05252', backgroundColor: '#1f0f0f' }}>
+                    style={{ color: '#f87171', backgroundColor: '#1e0d0d' }}>
                     ✕
                   </button>
                 </div>
