@@ -55,9 +55,9 @@ export function AddResultModal({ visible, onClose, sessionId, players, buyins, r
                 <button key={p.id} onClick={() => setPlayerId(p.id)}
                   className="px-4 py-2 rounded-full text-sm font-semibold border transition-colors"
                   style={{
-                    backgroundColor: playerId === p.id ? '#dc2626' : '#1b1e30',
-                    color: playerId === p.id ? '#ffffff' : '#e2e8f0',
-                    borderColor: playerId === p.id ? '#dc2626' : hasResult ? '#10b981' : '#232640',
+                    backgroundColor: playerId === p.id ? '#dc2626' : '#f1f5f9',
+                    color: playerId === p.id ? '#ffffff' : '#0f172a',
+                    borderColor: playerId === p.id ? '#dc2626' : hasResult ? '#10b981' : '#e2e8f0',
                   }}>
                   {p.name}{hasResult ? ' ✓' : ''}
                 </button>
@@ -67,7 +67,7 @@ export function AddResultModal({ visible, onClose, sessionId, players, buyins, r
         </div>
 
         {existing && (
-          <p className="text-sm px-3 py-2 rounded-lg" style={{ backgroundColor: '#2a1515', color: '#10b981' }}>
+          <p className="text-sm px-3 py-2 rounded-lg" style={{ backgroundColor: '#fef2f2', color: '#10b981' }}>
             Current result: {formatILS(existing.finalCash)} — will be overwritten.
           </p>
         )}
@@ -78,9 +78,9 @@ export function AddResultModal({ visible, onClose, sessionId, players, buyins, r
               <button key={mode} onClick={() => setUseChips(mode === 'chips')}
                 className="flex-1 py-2 rounded-xl text-sm font-semibold border transition-colors"
                 style={{
-                  backgroundColor: (mode === 'chips') === useChips ? '#dc2626' : '#1b1e30',
-                  color: (mode === 'chips') === useChips ? '#ffffff' : '#e2e8f0',
-                  borderColor: (mode === 'chips') === useChips ? '#dc2626' : '#232640',
+                  backgroundColor: (mode === 'chips') === useChips ? '#dc2626' : '#f1f5f9',
+                  color: (mode === 'chips') === useChips ? '#ffffff' : '#0f172a',
+                  borderColor: (mode === 'chips') === useChips ? '#dc2626' : '#e2e8f0',
                 }}>
                 {mode === 'chips' ? 'Enter Chips' : 'Enter Cash'}
               </button>

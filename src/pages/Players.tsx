@@ -54,9 +54,9 @@ export function Players() {
               <div key={s.playerId}
                 className="card-hover flex items-center justify-between p-4 rounded-2xl mb-3 cursor-pointer"
                 style={{
-                  backgroundColor: '#151829',
-                  border: '1px solid #232640',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #e2e8f0',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
                   borderLeft: `3px solid ${netColor}`,
                 }}
                 onClick={() => navigate(`/player/${s.playerId}`)}>
@@ -69,11 +69,11 @@ export function Players() {
                   </div>
                   {/* Avatar */}
                   <div className="w-10 h-10 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0"
-                    style={{ backgroundColor: '#1e1020', color: '#dc2626', border: '1px solid #2a1520' }}>
+                    style={{ backgroundColor: '#fef2f2', color: '#dc2626', border: '1px solid #fecaca' }}>
                     {s.playerName.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <p className="font-semibold text-[15px]" style={{ color: '#e2e8f0' }}>{s.playerName}</p>
+                    <p className="font-semibold text-[15px]" style={{ color: '#0f172a' }}>{s.playerName}</p>
                     <p className="text-xs" style={{ color: '#64748b' }}>{s.totalSessions} sessions</p>
                   </div>
                 </div>
@@ -84,7 +84,7 @@ export function Players() {
                   </div>
                   <button onClick={e => { e.stopPropagation(); handleDelete(s.playerId, s.playerName); }}
                     className="w-7 h-7 rounded-lg flex items-center justify-center text-xs transition-opacity hover:opacity-100 opacity-40"
-                    style={{ color: '#f87171', backgroundColor: '#1e0d0d' }}>
+                    style={{ color: '#f87171', backgroundColor: '#fef2f2' }}>
                     ✕
                   </button>
                 </div>

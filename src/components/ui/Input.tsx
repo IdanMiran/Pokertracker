@@ -10,7 +10,7 @@ export function Input({ label, className = '', ...props }: InputProps) {
       {label && <label className="text-sm font-medium" style={{ color: '#64748b' }}>{label}</label>}
       <input
         className={`w-full px-4 py-3 rounded-xl text-[15px] outline-none focus:border-[#dc2626] transition-colors ${className}`}
-        style={{ backgroundColor: '#1b1e30', border: '1px solid #232640', color: '#e2e8f0' }}
+        style={{ backgroundColor: '#f1f5f9', border: '1px solid #e2e8f0', color: '#0f172a' }}
         {...props}
       />
     </div>

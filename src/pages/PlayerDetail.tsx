@@ -60,18 +60,18 @@ export function PlayerDetail() {
     <div className="pb-24">
       {/* Profile hero */}
       <div className="relative overflow-hidden px-4 pt-6 pb-8 text-center"
-        style={{ background: 'linear-gradient(160deg, #1a0808 0%, #0d0f1a 70%)', borderBottom: '1px solid #232640' }}>
+        style={{ background: 'linear-gradient(160deg, #fff1f2 0%, #f8fafc 70%)', borderBottom: '1px solid #e2e8f0' }}>
         {/* Avatar */}
         <div className="w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-3"
           style={{
-            background: 'linear-gradient(135deg, #2a1010, #1a0808)',
+            background: '#fef2f2',
             color: '#dc2626',
-            border: '2px solid #2a1515',
+            border: '2px solid #fecaca',
             boxShadow: '0 0 20px rgba(220,38,38,0.2)',
           }}>
           {player.name.charAt(0).toUpperCase()}
         </div>
-        <p className="text-xl font-bold mb-3" style={{ color: '#e2e8f0' }}>{player.name}</p>
+        <p className="text-xl font-bold mb-3" style={{ color: '#0f172a' }}>{player.name}</p>
 
         {/* Big net */}
         <p className="text-5xl font-bold mb-1" style={{ color: netColor, letterSpacing: '-1px' }}>
@@ -81,13 +81,13 @@ export function PlayerDetail() {
       </div>
 
       {/* Stats grid */}
-      <div className="grid grid-cols-3 gap-2 p-4 border-b border-[#232640]">
+      <div className="grid grid-cols-3 gap-2 p-4 border-b border-[#e2e8f0]">
         {[
-          { label: 'Sessions', value: String(stats.totalSessions), color: '#e2e8f0' },
+          { label: 'Sessions', value: String(stats.totalSessions), color: '#0f172a' },
           { label: 'ROI', value: `${sign}${roi}%`, color: netColor },
-          { label: 'Invested', value: formatILS(stats.totalInvested), color: '#e2e8f0' },
+          { label: 'Invested', value: formatILS(stats.totalInvested), color: '#0f172a' },
         ].map(({ label, value, color }) => (
-          <div key={label} className="rounded-xl p-3 text-center" style={{ backgroundColor: '#151829', border: '1px solid #232640' }}>
+          <div key={label} className="rounded-xl p-3 text-center" style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0' }}>
             <p className="text-lg font-bold" style={{ color }}>{value}</p>
             <p className="text-xs" style={{ color: '#64748b' }}>{label}</p>
           </div>
@@ -95,14 +95,14 @@ export function PlayerDetail() {
       </div>
 
       {/* Best / worst */}
-      <div className="grid grid-cols-2 gap-2 px-4 py-4 border-b border-[#232640]">
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: '#0d1f15', border: '1px solid #1a3a25' }}>
+      <div className="grid grid-cols-2 gap-2 px-4 py-4 border-b border-[#e2e8f0]">
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0' }}>
           <p className="text-xs font-semibold tracking-widest mb-1" style={{ color: '#10b981' }}>BEST NIGHT</p>
           <p className="text-xl font-bold" style={{ color: '#10b981' }}>
             {stats.biggestWin > 0 ? `+${formatILS(stats.biggestWin)}` : '—'}
           </p>
         </div>
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: '#1f0d0d', border: '1px solid #3a1515' }}>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: '#fef2f2', border: '1px solid #fecaca' }}>
           <p className="text-xs font-semibold tracking-widest mb-1" style={{ color: '#f87171' }}>WORST NIGHT</p>
           <p className="text-xl font-bold" style={{ color: '#f87171' }}>
             {stats.biggestLoss < 0 ? `-${formatILS(Math.abs(stats.biggestLoss))}` : '—'}
@@ -127,30 +127,30 @@ export function PlayerDetail() {
                 onClick={() => navigate(`/session/${session.id}`)}
                 className="card-hover rounded-2xl p-4 mb-3 cursor-pointer"
                 style={{
-                  backgroundColor: '#151829',
-                  border: '1px solid #232640',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #e2e8f0',
                   borderLeft: `3px solid ${nc}`,
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
                 }}>
                 <div className="flex justify-between items-start mb-2">
                   <div>
-                    <p className="font-semibold text-[15px]" style={{ color: '#e2e8f0' }}>{session.name}</p>
+                    <p className="font-semibold text-[15px]" style={{ color: '#0f172a' }}>{session.name}</p>
                     <p className="text-xs" style={{ color: '#64748b' }}>{format(session.date, 'dd MMM yyyy')}</p>
                   </div>
                   <p className="text-lg font-bold" style={{ color: nc }}>
-                    {net === null ? <span className="text-sm px-2 py-0.5 rounded-full text-xs font-semibold" style={{ backgroundColor: '#1b1e30', color: '#64748b' }}>Pending</span>
+                    {net === null ? <span className="text-sm px-2 py-0.5 rounded-full text-xs font-semibold" style={{ backgroundColor: '#f1f5f9', color: '#64748b' }}>Pending</span>
                       : `${ns}${formatILS(Math.abs(net))}`}
                   </p>
                 </div>
                 <div className="flex gap-5 mt-1">
                   <div>
                     <p className="text-xs" style={{ color: '#64748b' }}>Bought in</p>
-                    <p className="text-sm font-semibold" style={{ color: '#e2e8f0' }}>{formatILS(totalBuyIn)}</p>
+                    <p className="text-sm font-semibold" style={{ color: '#0f172a' }}>{formatILS(totalBuyIn)}</p>
                   </div>
                   {finalCash !== null && (
                     <div>
                       <p className="text-xs" style={{ color: '#64748b' }}>Cashed out</p>
-                      <p className="text-sm font-semibold" style={{ color: '#e2e8f0' }}>{formatILS(finalCash)}</p>
+                      <p className="text-sm font-semibold" style={{ color: '#0f172a' }}>{formatILS(finalCash)}</p>
                     </div>
                   )}
                 </div>

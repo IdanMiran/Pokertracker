@@ -22,9 +22,9 @@ export function ResultsList({ sessionId, players, buyins, results, isActive }: P
         return (
           <div key={player.id}
             className="flex items-center justify-between p-4 rounded-xl border"
-            style={{ backgroundColor: '#1b1e30', borderColor: result ? '#10b981' : '#232640' }}>
+            style={{ backgroundColor: '#f1f5f9', borderColor: result ? '#10b981' : '#e2e8f0' }}>
             <div>
-              <p className="font-semibold" style={{ color: '#e2e8f0' }}>{player.name}</p>
+              <p className="font-semibold" style={{ color: '#0f172a' }}>{player.name}</p>
               <p className="text-sm" style={{ color: '#64748b' }}>Bought in: {formatILS(totalBuyIn)}</p>
             </div>
             <div className="flex items-center gap-3">
@@ -34,10 +34,10 @@ export function ResultsList({ sessionId, players, buyins, results, isActive }: P
                   <p className="text-xs" style={{ color: '#64748b' }}>cash out</p>
                 </div>
               ) : (
-                <span className="text-sm px-3 py-1 rounded-lg border border-[#232640]" style={{ color: '#64748b' }}>Pending</span>
+                <span className="text-sm px-3 py-1 rounded-lg border border-[#e2e8f0]" style={{ color: '#64748b' }}>Pending</span>
               )}
               {isActive && result && (
-                <button onClick={() => handleDelete(player.id)} className="text-xs px-2 py-0.5 rounded" style={{ color: '#f87171', backgroundColor: '#2a1515' }}>✕</button>
+                <button onClick={() => handleDelete(player.id)} className="text-xs px-2 py-0.5 rounded" style={{ color: '#f87171', backgroundColor: '#fef2f2' }}>✕</button>
               )}
             </div>
           </div>

@@ -24,18 +24,18 @@ export function BuyInList({ sessionId, players, buyins, isActive }: Props) {
       {Object.entries(grouped).map(([pid, entries]) => {
         const total = entries.reduce((s, e) => s + e.amount, 0);
         return (
-          <div key={pid} className="rounded-xl p-4 border border-[#232640]" style={{ backgroundColor: '#1b1e30' }}>
+          <div key={pid} className="rounded-xl p-4 border border-[#e2e8f0]" style={{ backgroundColor: '#f1f5f9' }}>
             <div className="flex justify-between mb-3">
-              <span className="font-bold" style={{ color: '#e2e8f0' }}>{playerMap[pid] ?? '?'}</span>
+              <span className="font-bold" style={{ color: '#0f172a' }}>{playerMap[pid] ?? '?'}</span>
               <span className="font-bold" style={{ color: '#dc2626' }}>{formatILS(total)}</span>
             </div>
             {entries.map((e, i) => (
-              <div key={e.id} className="flex justify-between py-1.5 border-t border-[#232640]">
+              <div key={e.id} className="flex justify-between py-1.5 border-t border-[#e2e8f0]">
                 <span className="text-sm" style={{ color: '#64748b' }}>Entry #{i + 1}</span>
                 <div className="flex items-center gap-3">
-                  <span className="text-sm" style={{ color: '#e2e8f0' }}>{formatILS(e.amount)}</span>
+                  <span className="text-sm" style={{ color: '#0f172a' }}>{formatILS(e.amount)}</span>
                   {isActive && (
-                    <button onClick={() => handleDelete(e.id)} className="text-xs px-2 py-0.5 rounded" style={{ color: '#f87171', backgroundColor: '#2a1515' }}>✕</button>
+                    <button onClick={() => handleDelete(e.id)} className="text-xs px-2 py-0.5 rounded" style={{ color: '#f87171', backgroundColor: '#fef2f2' }}>✕</button>
                   )}
                 </div>
               </div>

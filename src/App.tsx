@@ -21,15 +21,15 @@ function BottomNav() {
   return (
     <nav className="fixed bottom-0 left-0 right-0 flex z-40"
       style={{
-        backgroundColor: '#0a0c18',
-        borderTop: '1px solid #232640',
+        backgroundColor: '#ffffff',
+        borderTop: '1px solid #e2e8f0',
         paddingBottom: 'env(safe-area-inset-bottom)',
-        boxShadow: '0 -4px 20px rgba(0,0,0,0.5)',
+        boxShadow: '0 -4px 20px rgba(0,0,0,0.08)',
       }}>
       {tabs.map(({ to, label, icon }) => (
         <NavLink key={to} to={to} end={to === '/'}
           className={({ isActive }) =>
-            `flex-1 flex flex-col items-center py-3 gap-0.5 text-xs font-semibold transition-colors ${isActive ? 'text-[#dc2626]' : 'text-[#3a3f5c]'}`
+            `flex-1 flex flex-col items-center py-3 gap-0.5 text-xs font-semibold transition-colors ${isActive ? 'text-[#dc2626]' : 'text-[#94a3b8]'}`
           }>
           <span className="text-xl leading-none">{icon}</span>
           {label}
@@ -56,8 +56,8 @@ function TopBar() {
   return (
     <header className="sticky top-0 z-30 flex items-center px-4 h-14"
       style={{
-        backgroundColor: 'rgba(8,10,22,0.95)',
-        borderBottom: '1px solid #232640',
+        backgroundColor: 'rgba(255,255,255,0.95)',
+        borderBottom: '1px solid #e2e8f0',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
       }}>
@@ -67,7 +67,7 @@ function TopBar() {
       {isPlayer && (
         <NavLink to="/players" className="mr-3 flex items-center gap-1 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: '#dc2626' }}>← Players</NavLink>
       )}
-      <h1 className="text-[17px] font-bold" style={{ color: '#e2e8f0' }}>{title}</h1>
+      <h1 className="text-[17px] font-bold" style={{ color: '#0f172a' }}>{title}</h1>
     </header>
   );
 }
@@ -75,7 +75,7 @@ function TopBar() {
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="flex flex-col max-w-lg mx-auto" style={{ minHeight: '100dvh', backgroundColor: '#0d0f1a' }}>
+      <div className="flex flex-col max-w-lg mx-auto" style={{ minHeight: '100dvh', backgroundColor: '#f8fafc' }}>
         <TopBar />
         <main className="flex-1 overflow-y-auto">
           <Routes>

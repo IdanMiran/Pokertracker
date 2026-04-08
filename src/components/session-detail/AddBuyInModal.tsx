@@ -35,9 +35,9 @@ export function AddBuyInModal({ visible, onClose, sessionId, players }: Props) {
               <button key={p.id} onClick={() => setPlayerId(p.id)}
                 className="px-4 py-2 rounded-full text-sm font-semibold border transition-colors"
                 style={{
-                  backgroundColor: playerId === p.id ? '#dc2626' : '#1b1e30',
-                  color: playerId === p.id ? '#ffffff' : '#e2e8f0',
-                  borderColor: playerId === p.id ? '#dc2626' : '#232640',
+                  backgroundColor: playerId === p.id ? '#dc2626' : '#f1f5f9',
+                  color: playerId === p.id ? '#ffffff' : '#0f172a',
+                  borderColor: playerId === p.id ? '#dc2626' : '#e2e8f0',
                 }}>
                 {p.name}
               </button>

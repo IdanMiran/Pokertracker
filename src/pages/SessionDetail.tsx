@@ -52,25 +52,25 @@ export function SessionDetail() {
   return (
     <div className="flex flex-col" style={{ minHeight: 'calc(100dvh - 56px)' }}>
       {/* Header */}
-      <div className="p-4 border-b border-[#232640]" style={{ backgroundColor: '#151829' }}>
+      <div className="p-4 border-b border-[#e2e8f0]" style={{ backgroundColor: '#ffffff' }}>
         <div className="flex items-center justify-between mb-2">
           <p className="text-sm" style={{ color: '#64748b' }}>{format(session.date, 'EEEE, dd MMM yyyy')}</p>
           <Badge label={isActive ? 'Active' : 'Completed'} type={session.status} />
         </div>
         <div className="flex gap-6">
-          <div><p className="text-xs" style={{ color: '#64748b' }}>Players</p><p className="font-bold" style={{ color: '#e2e8f0' }}>{uniquePlayers}</p></div>
+          <div><p className="text-xs" style={{ color: '#64748b' }}>Players</p><p className="font-bold" style={{ color: '#0f172a' }}>{uniquePlayers}</p></div>
           <div><p className="text-xs" style={{ color: '#64748b' }}>Total pot</p><p className="font-bold" style={{ color: '#dc2626' }}>₪{totalPot}</p></div>
-          <div><p className="text-xs" style={{ color: '#64748b' }}>Results</p><p className="font-bold" style={{ color: '#e2e8f0' }}>{results.length}/{uniquePlayers}</p></div>
+          <div><p className="text-xs" style={{ color: '#64748b' }}>Results</p><p className="font-bold" style={{ color: '#0f172a' }}>{results.length}/{uniquePlayers}</p></div>
         </div>
       </div>
 
       {/* Section tabs */}
-      <div className="flex border-b border-[#232640]" style={{ backgroundColor: '#151829' }}>
+      <div className="flex border-b border-[#e2e8f0]" style={{ backgroundColor: '#ffffff' }}>
         {(['buyins', 'results', 'settlement'] as Section[]).map(s => (
           <button key={s} onClick={() => setSection(s)}
             className="flex-1 py-3 text-sm font-semibold border-b-2 transition-colors"
             style={{
-              color: section === s ? '#dc2626' : '#888',
+              color: section === s ? '#dc2626' : '#94a3b8',
               borderBottomColor: section === s ? '#dc2626' : 'transparent',
             }}>
             {s === 'buyins' ? 'Buy-Ins' : s === 'results' ? 'Results' : 'Settlement'}
