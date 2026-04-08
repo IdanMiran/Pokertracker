@@ -13,23 +13,28 @@ export function SessionCard({ session, buyins }: Props) {
 
   return (
     <div onClick={() => navigate(`/session/${session.id}`)}
-      className="rounded-xl p-4 border border-[#333] mb-3 cursor-pointer active:opacity-75 transition-opacity"
-      style={{ backgroundColor: '#1a1a1a' }}>
+      className="card-hover rounded-2xl p-4 mb-3 cursor-pointer"
+      style={{
+        backgroundColor: '#141414',
+        border: '1px solid #1f1f1f',
+        borderLeft: session.status === 'active' ? '3px solid #dc2626' : '3px solid #2a2a2a',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+      }}>
       <div className="flex items-start justify-between mb-3">
         <div>
-          <p className="font-bold text-lg" style={{ color: '#f5f5f5' }}>{session.name}</p>
-          <p className="text-sm" style={{ color: '#888' }}>{format(session.date, 'dd MMM yyyy')}</p>
+          <p className="font-bold text-[15px]" style={{ color: '#f5f5f5' }}>{session.name}</p>
+          <p className="text-xs mt-0.5" style={{ color: '#555' }}>{format(session.date, 'dd MMM yyyy')}</p>
         </div>
         <Badge label={session.status === 'active' ? 'Active' : 'Completed'} type={session.status} />
       </div>
-      <div className="flex gap-6">
+      <div className="flex gap-5">
         <div>
-          <p className="text-xs" style={{ color: '#888' }}>Players</p>
-          <p className="font-semibold" style={{ color: '#f5f5f5' }}>{uniquePlayers}</p>
+          <p className="text-xs" style={{ color: '#555' }}>Players</p>
+          <p className="text-sm font-semibold" style={{ color: '#f5f5f5' }}>{uniquePlayers}</p>
         </div>
         <div>
-          <p className="text-xs" style={{ color: '#888' }}>Total pot</p>
-          <p className="font-semibold" style={{ color: '#dc2626' }}>{formatILS(totalPot)}</p>
+          <p className="text-xs" style={{ color: '#555' }}>Total pot</p>
+          <p className="text-sm font-semibold" style={{ color: '#dc2626' }}>{formatILS(totalPot)}</p>
         </div>
       </div>
     </div>

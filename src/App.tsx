@@ -19,12 +19,17 @@ function BottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 flex border-t border-[#333] z-40"
-      style={{ backgroundColor: '#1a1a1a', paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <nav className="fixed bottom-0 left-0 right-0 flex z-40"
+      style={{
+        backgroundColor: '#0f0f0f',
+        borderTop: '1px solid #1a1a1a',
+        paddingBottom: 'env(safe-area-inset-bottom)',
+        boxShadow: '0 -4px 20px rgba(0,0,0,0.5)',
+      }}>
       {tabs.map(({ to, label, icon }) => (
         <NavLink key={to} to={to} end={to === '/'}
           className={({ isActive }) =>
-            `flex-1 flex flex-col items-center py-3 gap-0.5 text-xs font-semibold transition-colors ${isActive ? 'text-[#dc2626]' : 'text-[#888]'}`
+            `flex-1 flex flex-col items-center py-3 gap-0.5 text-xs font-semibold transition-colors ${isActive ? 'text-[#dc2626]' : 'text-[#444]'}`
           }>
           <span className="text-xl leading-none">{icon}</span>
           {label}
@@ -49,15 +54,20 @@ function TopBar() {
   const title = isSession || isPlayer ? '' : (titles[location.pathname] ?? 'Poker Tracker');
 
   return (
-    <header className="sticky top-0 z-30 flex items-center px-4 h-14 border-b border-[#333]"
-      style={{ backgroundColor: '#0a0a0a' }}>
+    <header className="sticky top-0 z-30 flex items-center px-4 h-14"
+      style={{
+        backgroundColor: 'rgba(10,10,10,0.95)',
+        borderBottom: '1px solid #1a1a1a',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+      }}>
       {isSession && (
-        <NavLink to="/sessions" className="mr-3 text-lg" style={{ color: '#dc2626' }}>←</NavLink>
+        <NavLink to="/sessions" className="mr-3 flex items-center gap-1 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: '#dc2626' }}>← Sessions</NavLink>
       )}
       {isPlayer && (
-        <NavLink to="/players" className="mr-3 text-lg" style={{ color: '#dc2626' }}>←</NavLink>
+        <NavLink to="/players" className="mr-3 flex items-center gap-1 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: '#dc2626' }}>← Players</NavLink>
       )}
-      <h1 className="text-lg font-bold" style={{ color: '#f5f5f5' }}>{title}</h1>
+      <h1 className="text-[17px] font-bold" style={{ color: '#f5f5f5' }}>{title}</h1>
     </header>
   );
 }

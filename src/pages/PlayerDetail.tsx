@@ -22,7 +22,7 @@ export function PlayerDetail() {
   const player = players.find(p => p.id === id);
 
   useEffect(() => {
-    if (sessions.length === 0) return;
+    if (sessions.length === 0) { setLoading(false); return; }
     let loaded = 0;
     const total = sessions.length * 2;
     const check = () => { if (++loaded >= total) setLoading(false); };
@@ -36,14 +36,16 @@ export function PlayerDetail() {
 
   if (!player) return (
     <div className="flex flex-col items-center justify-center h-64 gap-4">
-      <p style={{ color: '#888' }}>Player not found.</p>
-      <button onClick={() => navigate('/players')} style={{ color: '#dc2626' }}>← Back</button>
+      <p style={{ color: '#666' }}>Player not found.</p>
+      <button onClick={() => navigate('/players')} className="text-sm font-semibold" style={{ color: '#dc2626' }}>← Back to Players</button>
     </div>
   );
 
   const stats = aggregatePlayerStats([player], sessions, allBuyIns, allResults)[0];
+  const netColor = stats.totalNet > 0 ? '#4caf82' : stats.totalNet < 0 ? '#e05252' : '#888';
+  const sign = stats.totalNet > 0 ? '+' : stats.totalNet < 0 ? '-' : '';
+  const roi = stats.totalInvested > 0 ? ((stats.totalNet / stats.totalInvested) * 100).toFixed(0) : '0';
 
-  // Sessions this player participated in, most recent first
   const playerSessions = sessions
     .filter(s => (allBuyIns[s.id] ?? []).some(b => b.playerId === id))
     .map(s => {
@@ -54,93 +56,100 @@ export function PlayerDetail() {
       return { session: s, totalBuyIn, finalCash: result?.finalCash ?? null, net };
     });
 
-  const netColor = stats.totalNet > 0 ? '#4caf82' : stats.totalNet < 0 ? '#e05252' : '#888';
-  const sign = stats.totalNet > 0 ? '+' : stats.totalNet < 0 ? '-' : '';
-  const roi = stats.totalInvested > 0 ? ((stats.totalNet / stats.totalInvested) * 100).toFixed(0) : '0';
-
   return (
     <div className="pb-24">
-      {/* Profile header */}
-      <div className="p-5 text-center border-b border-[#333]" style={{ backgroundColor: '#1a1a1a' }}>
-        <div className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3"
-          style={{ backgroundColor: '#2a1515', color: '#dc2626' }}>
+      {/* Profile hero */}
+      <div className="relative overflow-hidden px-4 pt-6 pb-8 text-center"
+        style={{ background: 'linear-gradient(160deg, #1a0808 0%, #0a0a0a 70%)', borderBottom: '1px solid #1f1f1f' }}>
+        {/* Avatar */}
+        <div className="w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-3"
+          style={{
+            background: 'linear-gradient(135deg, #2a1010, #1a0808)',
+            color: '#dc2626',
+            border: '2px solid #2a1515',
+            boxShadow: '0 0 20px rgba(220,38,38,0.2)',
+          }}>
           {player.name.charAt(0).toUpperCase()}
         </div>
-        <p className="text-xl font-bold mb-1" style={{ color: '#f5f5f5' }}>{player.name}</p>
-        <p className="text-4xl font-bold mb-1" style={{ color: netColor }}>
+        <p className="text-xl font-bold mb-3" style={{ color: '#f5f5f5' }}>{player.name}</p>
+
+        {/* Big net */}
+        <p className="text-5xl font-bold mb-1" style={{ color: netColor, letterSpacing: '-1px' }}>
           {sign}{formatILS(Math.abs(stats.totalNet))}
         </p>
-        <p className="text-sm" style={{ color: '#888' }}>total net</p>
+        <p className="text-xs font-semibold tracking-widest" style={{ color: '#555' }}>TOTAL NET</p>
       </div>
 
-      {/* Stats row */}
-      <div className="grid grid-cols-3 gap-2 p-4 border-b border-[#333]">
-        <div className="rounded-xl p-3 text-center border border-[#333]" style={{ backgroundColor: '#1a1a1a' }}>
-          <p className="text-lg font-bold" style={{ color: '#f5f5f5' }}>{stats.totalSessions}</p>
-          <p className="text-xs" style={{ color: '#888' }}>Sessions</p>
-        </div>
-        <div className="rounded-xl p-3 text-center border border-[#333]" style={{ backgroundColor: '#1a1a1a' }}>
-          <p className="text-lg font-bold" style={{ color: netColor }}>{sign}{roi}%</p>
-          <p className="text-xs" style={{ color: '#888' }}>ROI</p>
-        </div>
-        <div className="rounded-xl p-3 text-center border border-[#333]" style={{ backgroundColor: '#1a1a1a' }}>
-          <p className="text-lg font-bold" style={{ color: '#f5f5f5' }}>{formatILS(stats.totalInvested)}</p>
-          <p className="text-xs" style={{ color: '#888' }}>Invested</p>
-        </div>
+      {/* Stats grid */}
+      <div className="grid grid-cols-3 gap-2 p-4 border-b border-[#1a1a1a]">
+        {[
+          { label: 'Sessions', value: String(stats.totalSessions), color: '#f5f5f5' },
+          { label: 'ROI', value: `${sign}${roi}%`, color: netColor },
+          { label: 'Invested', value: formatILS(stats.totalInvested), color: '#f5f5f5' },
+        ].map(({ label, value, color }) => (
+          <div key={label} className="rounded-xl p-3 text-center" style={{ backgroundColor: '#141414', border: '1px solid #1f1f1f' }}>
+            <p className="text-lg font-bold" style={{ color }}>{value}</p>
+            <p className="text-xs" style={{ color: '#555' }}>{label}</p>
+          </div>
+        ))}
       </div>
 
-      {/* Win/loss row */}
-      <div className="grid grid-cols-2 gap-2 px-4 pt-4 border-b border-[#333] pb-4">
-        <div className="rounded-xl p-3 text-center border border-[#333]" style={{ backgroundColor: '#1a1a1a' }}>
-          <p className="text-lg font-bold" style={{ color: '#4caf82' }}>
-            {stats.biggestWin > 0 ? `+${formatILS(stats.biggestWin)}` : formatILS(0)}
+      {/* Best / worst */}
+      <div className="grid grid-cols-2 gap-2 px-4 py-4 border-b border-[#1a1a1a]">
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: '#0d1f15', border: '1px solid #1a3a25' }}>
+          <p className="text-xs font-semibold tracking-widest mb-1" style={{ color: '#4caf82' }}>BEST NIGHT</p>
+          <p className="text-xl font-bold" style={{ color: '#4caf82' }}>
+            {stats.biggestWin > 0 ? `+${formatILS(stats.biggestWin)}` : '—'}
           </p>
-          <p className="text-xs" style={{ color: '#888' }}>Best night</p>
         </div>
-        <div className="rounded-xl p-3 text-center border border-[#333]" style={{ backgroundColor: '#1a1a1a' }}>
-          <p className="text-lg font-bold" style={{ color: '#e05252' }}>
-            {stats.biggestLoss < 0 ? `-${formatILS(Math.abs(stats.biggestLoss))}` : formatILS(0)}
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: '#1f0d0d', border: '1px solid #3a1515' }}>
+          <p className="text-xs font-semibold tracking-widest mb-1" style={{ color: '#e05252' }}>WORST NIGHT</p>
+          <p className="text-xl font-bold" style={{ color: '#e05252' }}>
+            {stats.biggestLoss < 0 ? `-${formatILS(Math.abs(stats.biggestLoss))}` : '—'}
           </p>
-          <p className="text-xs" style={{ color: '#888' }}>Worst night</p>
         </div>
       </div>
 
       {/* Session history */}
       <div className="p-4">
-        <p className="text-sm font-semibold mb-3" style={{ color: '#888' }}>SESSION HISTORY</p>
+        <p className="text-xs font-semibold tracking-widest mb-3" style={{ color: '#555' }}>SESSION HISTORY</p>
 
         {loading ? (
-          <div className="flex justify-center py-8">
-            <div style={{ color: '#dc2626' }}>♠️</div>
-          </div>
+          <div className="flex justify-center py-10"><div className="spinner" /></div>
         ) : playerSessions.length === 0 ? (
           <EmptyState icon="🃏" title="No sessions yet" subtitle="This player hasn't played any sessions" />
         ) : (
           playerSessions.map(({ session, totalBuyIn, finalCash, net }) => {
-            const netColor = net === null ? '#888' : net > 0 ? '#4caf82' : net < 0 ? '#e05252' : '#888';
-            const netSign = net !== null && net > 0 ? '+' : '';
+            const nc = net === null ? '#666' : net > 0 ? '#4caf82' : net < 0 ? '#e05252' : '#666';
+            const ns = net !== null && net > 0 ? '+' : '';
             return (
               <div key={session.id}
                 onClick={() => navigate(`/session/${session.id}`)}
-                className="rounded-xl p-4 border border-[#333] mb-3 cursor-pointer active:opacity-75"
-                style={{ backgroundColor: '#1a1a1a' }}>
+                className="card-hover rounded-2xl p-4 mb-3 cursor-pointer"
+                style={{
+                  backgroundColor: '#141414',
+                  border: '1px solid #1f1f1f',
+                  borderLeft: `3px solid ${nc}`,
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                }}>
                 <div className="flex justify-between items-start mb-2">
                   <div>
-                    <p className="font-semibold" style={{ color: '#f5f5f5' }}>{session.name}</p>
-                    <p className="text-sm" style={{ color: '#888' }}>{format(session.date, 'dd MMM yyyy')}</p>
+                    <p className="font-semibold text-[15px]" style={{ color: '#f5f5f5' }}>{session.name}</p>
+                    <p className="text-xs" style={{ color: '#555' }}>{format(session.date, 'dd MMM yyyy')}</p>
                   </div>
-                  <p className="text-lg font-bold" style={{ color: netColor }}>
-                    {net === null ? 'Pending' : `${netSign}${formatILS(Math.abs(net))}`}
+                  <p className="text-lg font-bold" style={{ color: nc }}>
+                    {net === null ? <span className="text-sm px-2 py-0.5 rounded-full text-xs font-semibold" style={{ backgroundColor: '#222', color: '#666' }}>Pending</span>
+                      : `${ns}${formatILS(Math.abs(net))}`}
                   </p>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-5 mt-1">
                   <div>
-                    <p className="text-xs" style={{ color: '#888' }}>Bought in</p>
+                    <p className="text-xs" style={{ color: '#555' }}>Bought in</p>
                     <p className="text-sm font-semibold" style={{ color: '#f5f5f5' }}>{formatILS(totalBuyIn)}</p>
                   </div>
                   {finalCash !== null && (
                     <div>
-                      <p className="text-xs" style={{ color: '#888' }}>Cashed out</p>
+                      <p className="text-xs" style={{ color: '#555' }}>Cashed out</p>
                       <p className="text-sm font-semibold" style={{ color: '#f5f5f5' }}>{formatILS(finalCash)}</p>
                     </div>
                   )}
