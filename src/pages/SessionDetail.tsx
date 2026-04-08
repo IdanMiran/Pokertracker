@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { usePlayers } from '../hooks/usePlayers';
 import { useSessionDetail } from '../hooks/useSessionDetail';
 import { BuyInList } from '../components/session-detail/BuyInList';
@@ -16,7 +16,6 @@ type Section = 'buyins' | 'results' | 'settlement';
 
 export function SessionDetail() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const { players } = usePlayers();
   const { session, buyins, results, loading } = useSessionDetail(id!);
   const [section, setSection] = useState<Section>('buyins');
