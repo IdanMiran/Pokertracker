@@ -2,12 +2,13 @@ import { BrowserRouter, Routes, Route, NavLink, useLocation } from 'react-router
 import { Dashboard } from './pages/Dashboard';
 import { Sessions } from './pages/Sessions';
 import { Players } from './pages/Players';
+import { PlayerDetail } from './pages/PlayerDetail';
 import { NewSession } from './pages/NewSession';
 import { SessionDetail } from './pages/SessionDetail';
 
 function BottomNav() {
   const location = useLocation();
-  const isDetailPage = location.pathname.startsWith('/session/');
+  const isDetailPage = location.pathname.startsWith('/session/') || location.pathname.startsWith('/player/');
 
   if (isDetailPage) return null;
 
@@ -44,13 +45,17 @@ function TopBar() {
   };
 
   const isSession = location.pathname.match(/^\/session\/(?!new)[^/]+$/);
-  const title = isSession ? '' : (titles[location.pathname] ?? 'Poker Tracker');
+  const isPlayer = location.pathname.match(/^\/player\/[^/]+$/);
+  const title = isSession || isPlayer ? '' : (titles[location.pathname] ?? 'Poker Tracker');
 
   return (
     <header className="sticky top-0 z-30 flex items-center px-4 h-14 border-b border-[#333]"
       style={{ backgroundColor: '#0a0a0a' }}>
       {isSession && (
         <NavLink to="/sessions" className="mr-3 text-lg" style={{ color: '#dc2626' }}>←</NavLink>
+      )}
+      {isPlayer && (
+        <NavLink to="/players" className="mr-3 text-lg" style={{ color: '#dc2626' }}>←</NavLink>
       )}
       <h1 className="text-lg font-bold" style={{ color: '#f5f5f5' }}>{title}</h1>
     </header>
@@ -69,6 +74,7 @@ export default function App() {
             <Route path="/players" element={<Players />} />
             <Route path="/session/new" element={<NewSession />} />
             <Route path="/session/:id" element={<SessionDetail />} />
+            <Route path="/player/:id" element={<PlayerDetail />} />
           </Routes>
         </main>
         <BottomNav />

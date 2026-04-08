@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usePlayers } from '../hooks/usePlayers';
 import { useSessions } from '../hooks/useSessions';
 import { AddPlayerModal } from '../components/players/AddPlayerModal';
-import { PlayerStatsModal } from '../components/players/PlayerStatsModal';
 import { EmptyState } from '../components/ui/EmptyState';
 import { aggregatePlayerStats } from '../lib/calculations/playerStats';
 import { deletePlayer } from '../lib/firestore/players';
 import { subscribeToBuyIns } from '../lib/firestore/buyins';
 import { subscribeToResults } from '../lib/firestore/results';
-import type { BuyIn, Result, PlayerStats } from '../types';
+import type { BuyIn, Result } from '../types';
 import { formatILS } from '../constants/config';
 
 export function Players() {
+  const navigate = useNavigate();
   const { players, loading } = usePlayers();
   const { sessions } = useSessions();
   const [showAdd, setShowAdd] = useState(false);
-  const [selected, setSelected] = useState<PlayerStats | null>(null);
   const [allBuyIns, setAllBuyIns] = useState<Record<string, BuyIn[]>>({});
   const [allResults, setAllResults] = useState<Record<string, Result[]>>({});
 
@@ -46,7 +46,7 @@ export function Players() {
               <div key={s.playerId}
                 className="flex items-center justify-between p-4 rounded-xl border border-[#333] mb-3 cursor-pointer active:opacity-75"
                 style={{ backgroundColor: '#1a1a1a' }}
-                onClick={() => setSelected(s)}>
+                onClick={() => navigate(`/player/${s.playerId}`)}>
                 <div className="flex items-center gap-3">
                   <div className="w-11 h-11 rounded-full flex items-center justify-center text-lg font-bold"
                     style={{ backgroundColor: '#2a1515', color: '#dc2626' }}>
@@ -80,7 +80,6 @@ export function Players() {
       </button>
 
       <AddPlayerModal visible={showAdd} onClose={() => setShowAdd(false)} />
-      <PlayerStatsModal visible={!!selected} onClose={() => setSelected(null)} stats={selected} />
     </div>
   );
 }
